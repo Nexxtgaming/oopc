@@ -67,6 +67,11 @@ bool ComplexNumber::operator!=(const ComplexNumber& other){
     if(this->real_part != other.real_part || this->imaginary_part != other.imaginary_part)return true;
     return false;
 }
+
+bool ComplexNumber::operator==(double number){
+    if(this->real_part == number && this->imaginary_part == 0)return true;
+    return false;
+}
 double ComplexNumber::getPhase(){
     double phase = atan2(this->imaginary_part, this->real_part);
     return phase;

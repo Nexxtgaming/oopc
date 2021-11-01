@@ -19,8 +19,9 @@ class ComplexNumber{
 	ComplexNumber &operator*=(const ComplexNumber& number);
 	ComplexNumber &operator-=(const ComplexNumber& number);
 	bool operator==(const ComplexNumber& number);
+	bool operator==(double number);
 	bool operator!=(const ComplexNumber& number);
 	double getAmplitude();
 	double getPhase();
 	~ComplexNumber();
-}
+};
