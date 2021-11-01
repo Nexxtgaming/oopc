@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <cmath>
 
 class ComplexNumber{
 	public:
@@ -7,11 +9,17 @@ class ComplexNumber{
 	ComplexNumber();
 	ComplexNumber(double);
 	ComplexNumber(double, double);
-	const ComplexNumber &operator<<(ostream& stream, const ComplexNumber& number);
-	const ComplexNumber &operator+(const ComplexNumber& number);
-	const ComplexNumber &operator-(const ComplexNumber& number);
-	const ComplexNumber &operator*(const ComplexNumber& number);
-	const ComplexNumber &operator/(const ComplexNumber& number);
+	friend std::ostream& operator<<(std::ostream& stream, const ComplexNumber& number);
+	ComplexNumber &operator+(const ComplexNumber& number);
+	ComplexNumber &operator-(const ComplexNumber& number);
+	ComplexNumber &operator*(const ComplexNumber& number);
+	ComplexNumber &operator/(const ComplexNumber& number);
+	ComplexNumber &operator+=(const ComplexNumber& number);
+	ComplexNumber &operator/=(const ComplexNumber& number);
+	ComplexNumber &operator*=(const ComplexNumber& number);
+	ComplexNumber &operator-=(const ComplexNumber& number);
+	bool operator==(const ComplexNumber& number);
+	bool operator!=(const ComplexNumber& number);
 	double getAmplitude();
 	double getPhase();
 	~ComplexNumber();
