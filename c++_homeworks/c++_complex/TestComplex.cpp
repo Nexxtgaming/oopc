@@ -1,5 +1,7 @@
 #include <iostream>
-#include <Complex.h>
+#include "Complex.h"
+
+using namespace std;
 
 void test_operators(){
     ComplexNumber a = ComplexNumber();
@@ -9,14 +11,24 @@ void test_operators(){
     (a += b) += c;
     a *= b *= c;
     (a *= b) *= c;
-    a + 7;
-    7 + a;
-    b * 5;
-    5 * b;
-    c == 3.5;
-    3.5 == c;   
+    ComplexNumber eq1 = a + 7;
+    ComplexNumber eq2 = 7 + a;
+    ComplexNumber eq3 = b * 5;
+    ComplexNumber eq4 = 5 * b;
+    
+    if(c==3.5){
+	cout<<c<<"equals"<<3.5<<endl;
+	}else{
+		cout<<c<<"not equals"<<3.5<<endl;
+		}
+	if(3.5 == c){
+		cout<<3.5<<"equals"<<c<<endl;
+	}else{
+		cout<<3.5<<"not equals"<<c<<endl;
+	}
+   // 3.5 == c;   
 }
 
 int main(){
-
+	test_operators();
 }
