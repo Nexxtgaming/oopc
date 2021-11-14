@@ -82,7 +82,7 @@ double ComplexNumber::getPhase() {
 	return phase;
 }
 double ComplexNumber::getAmplitude() {
-	double phase = sqrt(pow(this->imaginary_part, 2) + pow(this->real_part, 2));
-	return phase;
+	double amplitude = sqrt(pow(this->imaginary_part, 2) + pow(this->real_part, 2));
+	return amplitude;
 }
 
