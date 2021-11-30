@@ -14,8 +14,8 @@ ComplexNumber::ComplexNumber(double real, double imaginary) {
 	this->real_part = real;
 	this->imaginary_part = imaginary;
 }
-std::ostream& operator<<(std::ostream& stream, const ComplexNumber& number){
-	stream<<number.real_part<<" "<<number.imaginary_part<<"i ";
+std::ostream& operator<<(std::ostream& stream, const ComplexNumber& number) {
+	stream << number.real_part << " " << number.imaginary_part << "i ";
 	return stream;
 }
 ComplexNumber operator+(ComplexNumber first, ComplexNumber other) {
@@ -64,13 +64,13 @@ ComplexNumber& ComplexNumber::operator/=(ComplexNumber other) {
 						   (pow(this->real_part, 2) + pow(other.real_part, 2));
 	return *this;
 }
-bool operator==(ComplexNumber first, ComplexNumber other){
+bool operator==(ComplexNumber first, ComplexNumber other) {
 	if (first.real_part == other.real_part &&
 		first.imaginary_part == other.imaginary_part)
 		return true;
 	return false;
 }
-bool operator!=(ComplexNumber first, ComplexNumber other){
+bool operator!=(ComplexNumber first, ComplexNumber other) {
 	if (first.real_part != other.real_part ||
 		first.imaginary_part != other.imaginary_part)
 		return true;
@@ -82,7 +82,7 @@ double ComplexNumber::getPhase() {
 	return phase;
 }
 double ComplexNumber::getAmplitude() {
-	double amplitude = sqrt(pow(this->imaginary_part, 2) + pow(this->real_part, 2));
+	double amplitude =
+		sqrt(pow(this->imaginary_part, 2) + pow(this->real_part, 2));
 	return amplitude;
 }
-
