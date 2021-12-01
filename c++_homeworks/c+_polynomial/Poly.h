@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <map> 
+#include <cmath>
 
 class Poly{
     private:
@@ -13,6 +14,9 @@ class Poly{
 	friend Poly operator+(Poly first, Poly other);
 	friend Poly operator-(Poly first, Poly other);
     const Poly &operator=(const Poly &other);
+    Poly operator-() const;
+    friend Poly operator*(Poly first, Poly second);
+    double operator()(double number)const;
 
 
 };
