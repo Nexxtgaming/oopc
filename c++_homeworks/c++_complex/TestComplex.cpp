@@ -38,7 +38,7 @@ void test_operators() {
 	} else {
 		cout << c << "not equals" << 3.5 << endl;
 	}
-	if (3.5 == c) {
+	if (3.5 != c) {
 		cout << 3.5 << "equals" << c << endl;
 	} else {
 		cout << 3.5 << "not equals" << c << endl;

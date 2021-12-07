@@ -2,19 +2,12 @@
 
 using namespace std;
 
-ComplexNumber::ComplexNumber() {
-	this->real_part = 0;
-	this->imaginary_part = 0;
-}
-ComplexNumber::ComplexNumber(double real) {
-	this->real_part = real;
-	this->imaginary_part = 0;
-}
+
 ComplexNumber::ComplexNumber(double real, double imaginary) {
 	this->real_part = real;
 	this->imaginary_part = imaginary;
 }
-std::ostream& operator<<(std::ostream& stream, const ComplexNumber& number) {
+std::ostream& operator<<(std::ostream& stream, ComplexNumber number) {
 	stream << number.real_part << " " << number.imaginary_part << "i ";
 	return stream;
 }
@@ -23,18 +16,18 @@ ComplexNumber operator+(ComplexNumber first, ComplexNumber other) {
 	newComplexNumber += other;
 	return newComplexNumber;
 }
-ComplexNumber operator-(ComplexNumber& first, ComplexNumber& other) {
-	ComplexNumber& newComplexNumber = first;
+ComplexNumber operator-(ComplexNumber first, ComplexNumber other) {
+	ComplexNumber newComplexNumber = first;
 	newComplexNumber -= other;
 	return newComplexNumber;
 }
-ComplexNumber operator*(ComplexNumber first, ComplexNumber other) {
-	ComplexNumber& newComplexNumber = first;
+ComplexNumber operator*(ComplexNumber first, ComplexNumber other){ 
+	ComplexNumber newComplexNumber = first;
 	newComplexNumber *= other;
 	return newComplexNumber;
 }
 ComplexNumber operator/(ComplexNumber first, ComplexNumber other) {
-	ComplexNumber& newComplexNumber = first;
+	ComplexNumber newComplexNumber = first;
 	newComplexNumber /= other;
 	return newComplexNumber;
 }
@@ -64,13 +57,13 @@ ComplexNumber& ComplexNumber::operator/=(ComplexNumber other) {
 						   (pow(this->real_part, 2) + pow(other.real_part, 2));
 	return *this;
 }
-bool operator==(ComplexNumber first, ComplexNumber other) {
-	if (first.real_part == other.real_part &&
-		first.imaginary_part == other.imaginary_part)
+bool operator==(ComplexNumber other, ComplexNumber first) {
+	if (this->real_part == other.real_part &&
+		this->imaginary_part == other.imaginary_part)
 		return true;
 	return false;
 }
-bool operator!=(ComplexNumber first, ComplexNumber other) {
+bool operator!=(ComplexNumber other, ComplexNumber first) {
 	if (first.real_part != other.real_part ||
 		first.imaginary_part != other.imaginary_part)
 		return true;

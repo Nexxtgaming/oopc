@@ -1,25 +1,23 @@
 #pragma once
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
-class ComplexNumber{
-	public:
-	int imaginary_part;
-	int real_part;
-	ComplexNumber();
-	ComplexNumber(double real);
-	ComplexNumber(double real, double imaginary);
-	friend std::ostream& operator<<(std::ostream& stream, const ComplexNumber& number);
-	friend ComplexNumber operator+(ComplexNumber first, ComplexNumber other);
-	friend ComplexNumber operator-(ComplexNumber first, ComplexNumber other);
-	friend ComplexNumber operator*(ComplexNumber first, ComplexNumber other);
-	friend ComplexNumber operator/(ComplexNumber first, ComplexNumber other);
-	ComplexNumber &operator+=(ComplexNumber other);
-	ComplexNumber &operator/=(ComplexNumber other);
-	ComplexNumber &operator*=(ComplexNumber other);
-	ComplexNumber &operator-=(ComplexNumber other);
-	friend bool operator==(ComplexNumber first, ComplexNumber other);
-	friend bool operator!=(ComplexNumber first, ComplexNumber other);
+class ComplexNumber {
+  public:
+	double imaginary_part;
+	double real_part;
+	ComplexNumber(double real = 0, double imaginary = 0);
+	ComplexNumber& operator+=(ComplexNumber other);
+	ComplexNumber& operator/=(ComplexNumber other);
+	ComplexNumber& operator*=(ComplexNumber other);
+	ComplexNumber& operator-=(ComplexNumber other);
 	double getAmplitude();
 	double getPhase();
 };
+ComplexNumber operator+(ComplexNumber first, ComplexNumber other);
+ComplexNumber operator-(ComplexNumber first, ComplexNumber other);
+ComplexNumber operator*(ComplexNumber first, ComplexNumber other);
+ComplexNumber operator/(ComplexNumber first, ComplexNumber other);
+std::ostream& operator<<(std::ostream& stream, ComplexNumber number);
+bool operator==(ComplexNumber other);
+bool operator!=(ComplexNumber other);
