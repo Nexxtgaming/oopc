@@ -58,8 +58,8 @@ ComplexNumber& ComplexNumber::operator/=(ComplexNumber other) {
 	return *this;
 }
 bool operator==(ComplexNumber other, ComplexNumber first) {
-	if (this->real_part == other.real_part &&
-		this->imaginary_part == other.imaginary_part)
+	if (first.real_part == other.real_part &&
+		first.imaginary_part == other.imaginary_part)
 		return true;
 	return false;
 }

@@ -19,5 +19,5 @@ ComplexNumber operator-(ComplexNumber first, ComplexNumber other);
 ComplexNumber operator*(ComplexNumber first, ComplexNumber other);
 ComplexNumber operator/(ComplexNumber first, ComplexNumber other);
 std::ostream& operator<<(std::ostream& stream, ComplexNumber number);
-bool operator==(ComplexNumber other);
-bool operator!=(ComplexNumber other);
+bool operator==(ComplexNumber first, ComplexNumber other);
+bool operator!=(ComplexNumber first, ComplexNumber other);

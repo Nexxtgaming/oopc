@@ -56,12 +56,12 @@ const Poly& Poly::operator=(const Poly& other){
     this->map = other.map;
     return *this;
 }
-Poly operator+(Poly first, Poly other){
+Poly operator+(const Poly& first, const Poly& other){
     Poly result = first;
     for(auto itr = other.map.rbegin(); itr !=other.map.rend(); ++itr){
         int otherPower = itr->first;
         double otherCoeff= itr->second;
-        std::map<int, double>::iterator firstItr = first.map.find(otherPower);
+        auto firstItr = first.map.find(otherPower);
         if(firstItr != first.map.end()){
             double firstCoeff = firstItr->second;
             double newCoeff = otherCoeff + firstCoeff;
@@ -73,7 +73,7 @@ Poly operator+(Poly first, Poly other){
     }
     return result;
 }
-Poly operator-(Poly first, Poly other){
+Poly operator-(const Poly& first, const Poly& other){
     Poly result = first + (-other);
     return result;
 }
@@ -91,7 +91,7 @@ Poly Poly::operator-()const{
     }
     return result;
 }
-Poly operator*(Poly first, Poly second){
+Poly operator*(const Poly& first, const Poly& second){
     Poly result = Poly();
     for(auto itr = first.map.rbegin(); itr !=first.map.rend(); ++itr){
         int firstPower = itr->first;
