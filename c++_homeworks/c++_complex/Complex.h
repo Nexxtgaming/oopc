@@ -11,8 +11,8 @@ class ComplexNumber {
 	ComplexNumber& operator/=(ComplexNumber other);
 	ComplexNumber& operator*=(ComplexNumber other);
 	ComplexNumber& operator-=(ComplexNumber other);
-	double getAmplitude();
-	double getPhase();
+	double getAmplitude() const;
+	double getPhase() const;
 };
 ComplexNumber operator+(ComplexNumber first, ComplexNumber other);
 ComplexNumber operator-(ComplexNumber first, ComplexNumber other);
