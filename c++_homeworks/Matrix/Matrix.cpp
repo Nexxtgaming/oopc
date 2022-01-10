@@ -1,61 +1,38 @@
 #include "Matrix.h"
 
-Cell::Cell(int number){
-    this->value = number;
-    this->calledBy = nullptr;
+Data::Data(int x, int y){
+    this->x = x;
+    this->y = y;
+    this->refCount = 1;
+    this->table = new int*[x];
+
 }
 
-
-void Cell::changeTable(int number){
-    int x = *(this->calledBy->x);
-    int y = *(this->calledBy->y);
-
-    (*this->calledBy->refCount)--;
-    Cell** oldTable = this->calledBy->table;
-    this->calledBy->newValue(x, y);
-
+Data::Data(const Data& other){
+    this->x = other.x;
+    this->y = other.y;
+    this->refCount = 1;
+    this->table = new int*[x];
     for(int i = 0; i < x; i++){
-        this->calledBy->table[i] = new Cell[y];
+        this->table[i] = new int[y];
         for(int j = 0; j < y; j++){
-            int value = oldTable[i][j];
-            if(oldTable[i][j].calledBy == this->calledBy) value = number;
-            this->calledBy->table[i][j] = Cell(value);
+            this->table[i][j] = other.table[i][j];
         }
+
     }
-
-    oldTable = nullptr;
-    delete[] oldTable;
 }
 
 
-void Cell::operator=(int number){
-    if(this->value != number && *this->calledBy->refCount > 1){
-        this->changeTable(number);
-        
-    }else{
-        this->value = number;
+int Data::getValue(int x, int y){
+    return this->table[x][y];
+}
+
+
+Data::~Data(){
+    for(int i = 0; i < x; i++){
+        delete[] this->table[i];
     }
-    this->calledBy = nullptr;
-}
-
-
-Cell::operator int() const{
-    return this->value;
-}
-
-
-bool Cell::operator!=(const Cell& other){
-    return this->value != other.value;
-}
-
-std::ostream& operator<<(std::ostream& stream, const Cell& cell){
-    stream<<" "<<cell.value<<" ";
-    return stream;
-}
-
-Cell::~Cell(){
-    this->calledBy = nullptr;
-    delete this->calledBy;
+    delete[] this->table;
 }
 
 
@@ -68,25 +45,21 @@ Matrix::Matrix(int x, int y){
     if( x == 1 && y == 1){
         throw InvalidIndex();
     }
-
-    this->table = new Cell* [x];
+    this->data = new Data(x,y);
 
     for(int i = 0; i < x; i++){
-        this->table[i] = new Cell[y];
+        this->data->table[i] = new int[y];
+        for(int j = 0; j < y; j++){
+            this->data->table[i][j] = 0;
+        }
     }
 
-    this->x = new int(x);
-    this->y = new int(y)    ;
-    this->refCount = new int(1);
 }
 
 
 Matrix::Matrix(const Matrix& matrix){
-    this->table = matrix.table;
-    this->x = matrix.x; 
-    this->y = matrix.y;
-    this->refCount = matrix.refCount;
-    (*this->refCount)++;
+    this->data = matrix.data;
+    this->data->refCount++;
 }
 
 
@@ -94,7 +67,7 @@ bool Matrix::isCharInLine(std::string line){
     bool wasSpace = false;
     bool wasMinus = false;
 
-    for(int i = 0; i < line.size(); i++){
+    for(size_t i = 0; i < line.size(); i++){
 
         if(line[i] == ' ' && !wasSpace){
             wasSpace = true;
@@ -124,17 +97,16 @@ bool Matrix::isCharInLine(std::string line){
 
 void Matrix::loadFromString(std::string matrixString, int x){
     int i = 0;
-    this->x = new int(i);
-    int j = 0;
+    this->data->x = i;
+    size_t j = 0;
 
     while( i  < x){
-        delete this->x;
-        this->x = new int(i+1);
+        this->data->x = i+1;
         int y = 1;
         bool notNumber = true;
         bool isNegative = false;
         int value = 0;
-        this->table[i] = new Cell[1];
+        this->data->table[i] = new int[1];
 
         while(j < matrixString.size()){
             char character= matrixString[j];
@@ -146,22 +118,22 @@ void Matrix::loadFromString(std::string matrixString, int x){
             }
 
             if((character == ' ' || character == ';') && !notNumber){
-                this->table[i][y-1].value = value;
+                this->data->table[i][y-1] = value;
                 value = 0;
                 y++;
                 if(character == ' ' ){
-                    Cell* tmp = this->table[i];
-                    this->table[i] = nullptr;
-                    this->table[i] = new Cell[y];
+                    int* tmp = this->data->table[i];
+                    this->data->table[i] = nullptr;
+                    this->data->table[i] = new int[y];
                     for(int k = 0; k < y-1; k++){
-                        this->table[i][k].value = (int)tmp[k];
+                        this->data->table[i][k] = (int)tmp[k];
                     }
                     delete[] tmp;
 
                 }
                 if(character == ';'){
                     if(i == 0){
-                        this->y = new int(y-1);
+                        this->data->y = y-1;
                     }
                     i++;
                     break;
@@ -212,8 +184,7 @@ Matrix::Matrix(std::string filename){
         }
 
         file.close();
-        this->refCount = new int(1);
-        this->table = new Cell*[x];
+        this->data = new Data(x,0);
         loadFromString(matrixString, x);
 
     }else{
@@ -283,20 +254,21 @@ void Matrix::mathOperation(const Matrix& other, char choice){
     int x = this->getX();
     int y = this->getY();
     int newY = (choice == '*')? x : y;
-    Cell** oldTable = this->table;
-    int refCount = *this->refCount;
+    Data * oldData = this->data;
+    int** oldTable = this->data->table;
+    int refCount = this->data->refCount;
     resetValue(true);
-    newValue(x, newY);
+    this->data = new Data(x, newY);
 
     for(int i = 0; i < x; i++){
-        this->table[i] = new Cell[newY];
+        this->data->table[i] = new int[newY];
         if(choice != '*'){
             for(int j = 0; j < y; j++){
                 if(choice == '+'){
-                    this->table[i][j].value = (int)oldTable[i][j] + (int)other.table[i][j];
+                    this->data->table[i][j] = oldTable[i][j] + other.data->table[i][j];
                 }
                 if(choice =='-'){
-                    this->table[i][j].value = (int)oldTable[i][j] - (int)other.table[i][j];
+                    this->data->table[i][j] = oldTable[i][j] - other.data->table[i][j];
 
                 }
             }
@@ -305,19 +277,17 @@ void Matrix::mathOperation(const Matrix& other, char choice){
             for(int j = 0; j < newY; j++){
                 int value = 0;
                 for(int k = 0; k < y; k++){
-                    value += (int)oldTable[i][k] * (int)other.table[k][i];
+                    value += oldTable[i][k] * other.data->table[k][i];
                 }
-                this->table[i][j].value = value;
+                this->data->table[i][j] = value;
             }
         }
 
-        if(refCount <= 1){
-            delete[] oldTable[i];
-        }
     }
     if(refCount <= 1){
-        delete[] oldTable;
+        delete oldData;
     }else{
+        oldData = nullptr;
         oldTable = nullptr;
     }
 
@@ -327,21 +297,14 @@ void Matrix::mathOperation(const Matrix& other, char choice){
 Matrix& Matrix::operator=(const Matrix& other){
     if(*this != other){
 
-        if(*this->refCount == 1){
-                this->deleteTable();
-                delete this->refCount;
-                delete this->x;
-                delete this->y;
-                delete[] this->table;
-            }else if(*this->refCount > 1){
-                (*this->refCount)--;
-            }
+        if(this->data->refCount == 1){
+            delete this->data;
+        }else if(this->data->refCount > 1){
+            (this->data->refCount)--;
+        }
 
-            this->refCount = other.refCount;
-            (*this->refCount)++;
-            this->x = other.x;
-            this->y = other.y;
-            this->table = other.table;
+            this->data = other.data;
+            (this->data->refCount)++;
 
         }
         return *this;
@@ -349,14 +312,14 @@ Matrix& Matrix::operator=(const Matrix& other){
 
 
 bool Matrix::operator!=(const Matrix& other)const{
-    if(*this->x != *other.x) return true;
-    if(*this->y != *other.y) return true;
+    if(this->data->x != other.data->x) return true;
+    if(this->data->y != other.data->y) return true;
 
     bool areEqual = true;
 
-    for(int i = 0; i < *this->x; i++){
-        for(int j = 0; j < *this->y; j++){
-            if(this->table[i][j] != other.table[i][j]){
+    for(int i = 0; i < this->data->x; i++){
+        for(int j = 0; j < this->data->y; j++){
+            if(this->data->table[i][j] != other.data->table[i][j]){
                 areEqual = false;   
             }
         }
@@ -368,7 +331,7 @@ bool Matrix::operator!=(const Matrix& other)const{
 std::ostream& operator<<(std::ostream& stream, const Matrix& matrix){
     for(int i = 0; i < matrix.getX(); i++){
         for(int j = 0; j < matrix.getY(); j++){
-            stream<<matrix.table[i][j]<<" ";
+            stream<<matrix.data->getValue(i, j)<<" ";
         }
         stream<<std::endl;
 
@@ -383,71 +346,66 @@ bool Matrix::operator==(const Matrix& other)const{
 
 
 int Matrix::getRefCount(){
-    return *this->refCount;
+    return this->data->refCount;
 }
 
 
 int Matrix::getX() const{
-    return *this->x;
+    return this->data->x;
 }
 
 
 int Matrix::getY()const{
-    return *this->y;
+    return this->data->y;
 }
 
-
-Cell& Matrix::operator()(int x, int y)const{
-
-    if(x > *this->x || y > *this->y){
+void Matrix::isOutOfBounds(int x, int y)const{
+ if(x > this->data->x || y > this->data->y){
         throw IndexOutOfBonds();
     }
 
     if( x < 0 || y < 0){
         throw NegativeIndex();
     }
-    
-    this->table[x][y].calledBy = this;
-    return this->table[x][y];
+
 }
 
+int& Matrix::operator()(int x, int y){
+    isOutOfBounds(x, y);
+    if(this->data->refCount == 1){
+    return this->data->table[x][y];
 
-void Matrix::deleteTable(){
-   for(int i = 0; i < *this->x; i++){
-        delete[] this->table[i];
+    }else{
+        Data * oldData = this->data;
+        oldData->refCount--;
+        this->data = new Data(*oldData);
+        return this->data->table[x][y];
     }
- 
 }
+
+
+int Matrix::operator()(int x, int y)const{
+    isOutOfBounds(x, y);
+    return this->data->table[x][y];
+}
+
 
 void Matrix::resetValue(bool isMathOperation){
     int refCount = this->getRefCount();
     if(refCount > 1){
-        this->table = nullptr;
-        this->x = nullptr;
-        this->y = nullptr;
-        (*this->refCount)--;
-        this->refCount = nullptr;
+        this->data->refCount--;
+        this->data = nullptr;
     }else{
         if(isMathOperation){
-            this->table = nullptr;
+            this->data = nullptr;
         }else{
-            this->deleteTable();
-            delete[] this->table;
+            delete this->data;
 
         }
-        delete this->x;
-        delete this->y;
-        delete this->refCount;
+        
     }
 }
 
-void Matrix::newValue(int x, int y)const{
-    this->x = new int(x);
-    this->y = new int(y);
-    this->refCount = new int(1);
-    this->table = new Cell*[x];
-
-}
 
 Matrix::~Matrix(){
     this->resetValue(false);
