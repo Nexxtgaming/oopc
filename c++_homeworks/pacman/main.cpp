@@ -16,7 +16,8 @@ int main(int argc, char *argv[])
     QGraphicsScene * scene = new QGraphicsScene ();
     Pacman * pacman = new Pacman();
     BackGround * background = new BackGround();
-    background->drawBackGround();
+    GameMap * gamemap = new GameMap();
+    background->drawBackGround(gamemap);
 
     pacman->setFlag(QGraphicsItem::ItemIsFocusable);
     scene->addItem(pacman);

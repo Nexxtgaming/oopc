@@ -27,12 +27,17 @@ bool Book::operator==(const Book& other){
 }
 
 std::ostream& operator<<(std::ostream& stream, const Book& book){
-    stream<<"Book { ";
-    stream<<"Name: "<<book.name;
-    stream<<"Category: "<<book.category;
+    stream<<" Book { ";
+    stream<<" Name: "<<book.name;
+    stream<<" Category: "<<book.category;
     stream<<" author: "<<book.author;
-    stream<<"pageNumber: "<<book.pageNumber;
-    stream<<"is borrowed: "<<book.borrowed;
+    stream<<" pageNumber: "<<book.pageNumber;
+    stream<<" status: ";
+    if(book.borrowed){
+		stream<<"not available";
+	}else{
+		stream<<"is available";
+	}
     return stream;
 }
 

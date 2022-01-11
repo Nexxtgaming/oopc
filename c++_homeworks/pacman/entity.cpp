@@ -2,7 +2,8 @@
 
 bool Entity::isMovePossible(std::string direction)
 {
-    if(direction == "right" && )
+   // if(direction == "right" && )
+    return true;
 
 }
 

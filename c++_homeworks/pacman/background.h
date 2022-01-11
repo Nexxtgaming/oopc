@@ -11,7 +11,7 @@ class BackGround : public QWidget
     Q_OBJECT
 public:
     explicit BackGround(QWidget *parent = nullptr);
-    void drawBackGround(GameMap& gamemap);
+    void drawBackGround(GameMap * gamemap);
 
 signals:
 

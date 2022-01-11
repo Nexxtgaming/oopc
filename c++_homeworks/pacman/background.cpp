@@ -6,13 +6,13 @@ BackGround::BackGround(QWidget *parent) : QWidget(parent)
 
 }
 
-void BackGround::drawBackGround(GameMap& gamemap)
+void BackGround::drawBackGround(GameMap * gamemap)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
     QPainterPath wallsPath;
     QPainterPath otherPath;
-    gamemap.drawBoard(wallsPath, otherPath);
+    gamemap->drawBoard(wallsPath, otherPath);
 
     p.fillPath(wallsPath, Qt::blue);
     p.drawPath(wallsPath);
