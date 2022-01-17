@@ -17,20 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    background.cpp \
-    enemy.cpp \
-    entity.cpp \
-    gamemap.cpp \
-    main.cpp \
-    pacman.cpp
+    sources/background.cpp \
+    sources/enemy.cpp \
+    sources/entity.cpp \
+    sources/gamemap.cpp \
+    sources/main.cpp \
+    sources/pacman.cpp
 
 HEADERS += \
-    background.h \
-    config.h \
-    enemy.h \
-    entity.h \
-    gamemap.h \
-    pacman.h
+    headers/background.h \
+    headers/config.h \
+    headers/enemy.h \
+    headers/entity.h \
+    headers/gamemap.h \
+    headers/pacman.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -38,13 +38,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    blue-ghost.png \
-    orange-ghost.png \
-    pacman-down.png \
-    pacman-left.png \
-    pacman-right.png \
-    pacman-up.png \
-    point1.png \
-    point2.png \
-    red-ghost.png \
-    white-ghost.png
+    resources/blue-ghost.png \
+    resources/orange-ghost.png \
+    resources/pacman-down.png \
+    resources/pacman-left.png \
+    resources/pacman-right.png \
+    resources/pacman-up.png \
+    resources/point1.png \
+    resources/point2.png \
+    resources/red-ghost.png \
+    resources/white-ghost.png

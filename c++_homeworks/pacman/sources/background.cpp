@@ -1,12 +1,10 @@
-#include "background.h"
+#include "../headers/background.h"
 
 BackGround::BackGround(QWidget *parent) : QWidget(parent)
 {
-
-
 }
 
-void BackGround::drawBackGround(GameMap& gamemap)
+void BackGround::drawBackGround(GameMap &gamemap)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing);
@@ -19,6 +17,4 @@ void BackGround::drawBackGround(GameMap& gamemap)
 
     p.fillPath(otherPath, Qt::black);
     p.drawPath(otherPath);
-
-
 }
