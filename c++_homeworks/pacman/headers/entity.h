@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include "gamemap.h"
+#include "gamemanager.h"
+
 class GameManager;
 class Entity : public QObject, public QGraphicsPixmapItem
 {

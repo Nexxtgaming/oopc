@@ -1,11 +1,10 @@
 #ifndef PACMAN_H
 #define PACMAN_H
 
-#include "headers/entity.h"
-#include "headers/config.h"
+#include "config.h"
 #include <QKeyEvent>
-#include "headers/gamemap.h"
-#include "headers/enemy.h"
+#include "entity.h"
+
 class Pacman : public Entity
 {
     Q_OBJECT

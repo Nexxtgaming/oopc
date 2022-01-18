@@ -3,8 +3,8 @@
 
 #include <QPainterPath>
 #include "config.h"
-#include "pacman.h"
-#include "gamemanager.h"
+class GameManager;
+class Pacman;
 
 class GameMap
 {

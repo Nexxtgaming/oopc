@@ -9,7 +9,9 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
+#include "gamemanager.h"
 
+class Pacman;
 class Enemy : public Entity
 {
     Q_OBJECT

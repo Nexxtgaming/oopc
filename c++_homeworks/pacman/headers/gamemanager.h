@@ -1,14 +1,13 @@
 #pragma once
 #include <iostream>
-#include "pacman.h"
-#include "gamemap.h"
-#include "enemy.h"
-#include "entity.h"
 #include "config.h"
 #include <QElapsedTimer>
-
+#include "gamemap.h"
+#include "enemy.h"
+#include "pacman.h"
 class GameMap;
 class Enemy;
+class Pacman;
 class GameManager
 {
 private:
