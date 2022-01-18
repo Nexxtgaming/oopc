@@ -27,6 +27,8 @@ void LibraryDatabase(){
     database.add(firstBook.name, firstBook);
     Book* foundBook = database.find("Harry Potter");
     foundBook->borrowed = true;
+    cout<<"-------- LIBRARY DATABASE-------"<<endl;
+    cout<<database<<endl;
 }
 
 int main() {
@@ -46,6 +48,7 @@ int main() {
 
     addSameKeys(database);
     getNonExistingKey(database);
+    LibraryDatabase();
 }
 
 void addEmployees(Database& database) {
