@@ -1,6 +1,4 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
+#pragma once
 constexpr int MARGIN_X = 100;
 constexpr int MARGIN_Y = 100;
 constexpr int SIZE = 8;
@@ -12,4 +10,3 @@ constexpr int ENEMY_NUMBER = 3;
 constexpr int SCATTER_DURATION = 30000;
 constexpr int SCARED_DURATION = 30000;
 
-#endif // CONFIG_H

@@ -1,17 +1,17 @@
-#ifndef ENEMY_H
-#define ENEMY_H
+#pragma once 
 
+#include "entity.h"
 #include <QTimer>
 #include <QObject>
-#include "entity.h"
 #include <vector>
 #include "direction.h"
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-#include "gamemanager.h"
+#include "pacman.h"
 
 class Pacman;
+
 class Enemy : public Entity
 {
     Q_OBJECT
@@ -32,4 +32,3 @@ public slots:
     void move();
 };
 
-#endif // ENEMY_H

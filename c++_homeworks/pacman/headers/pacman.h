@@ -1,9 +1,8 @@
-#ifndef PACMAN_H
-#define PACMAN_H
-
+#pragma once 
+#include "entity.h"
 #include "config.h"
 #include <QKeyEvent>
-#include "entity.h"
+#include "gamemanager.h"
 
 class Pacman : public Entity
 {
@@ -21,4 +20,3 @@ public:
     friend class Enemy;
 };
 
-#endif // PACMAN_H

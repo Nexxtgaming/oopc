@@ -1,6 +1,4 @@
-#ifndef BACKGROUND_H
-#define BACKGROUND_H
-
+#pragma once
 #include <QWidget>
 #include "../headers/gamemap.h"
 #include <QPainter>
@@ -16,4 +14,3 @@ public:
 signals:
 };
 
-#endif // BACKGROUND_H

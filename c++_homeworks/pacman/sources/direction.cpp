@@ -1,6 +1,6 @@
 #include "../headers/direction.h"
 
-direction::Direction(std::string directionString)
+Direction::Direction(std::string directionString)
 {
     this->directionString = directionString;
     setVector();

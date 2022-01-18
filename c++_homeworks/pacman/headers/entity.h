@@ -1,12 +1,14 @@
-#ifndef ENTITY_H
-#define ENTITY_H
+#pragma once 
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
-#include "gamemap.h"
+#include "config.h"
 #include "gamemanager.h"
+#include "gamemap.h"
 
+class GameMap;
 class GameManager;
+
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -21,4 +23,3 @@ public:
     friend class GameManager;
 };
 
-#endif // ENTITY_H

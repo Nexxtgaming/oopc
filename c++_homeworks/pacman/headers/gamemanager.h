@@ -2,17 +2,15 @@
 #include <iostream>
 #include "config.h"
 #include <QElapsedTimer>
-#include "gamemap.h"
-#include "enemy.h"
-#include "pacman.h"
+class Pacman;
 class GameMap;
 class Enemy;
-class Pacman;
+
 class GameManager
 {
 private:
-    Pacman *player;
     GameMap *gameMap;
+    Pacman *player;
     Enemy *enemies[ENEMY_NUMBER];
     int enemyNumber = 0;
     int mode = 1;

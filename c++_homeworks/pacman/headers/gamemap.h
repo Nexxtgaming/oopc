@@ -1,10 +1,8 @@
-#ifndef GAMEMAP_H
-#define GAMEMAP_H
-
+#pragma once
 #include <QPainterPath>
 #include "config.h"
+#include "gamemanager.h"
 class GameManager;
-class Pacman;
 
 class GameMap
 {
@@ -52,4 +50,3 @@ public:
     void drawBoard(QPainterPath &wallsPath, QPainterPath &otherPath);
 };
 
-#endif // GAMEMAP_H

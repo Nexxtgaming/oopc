@@ -21,11 +21,15 @@ SOURCES += \
     sources/enemy.cpp \
     sources/entity.cpp \
     sources/gamemap.cpp \
+    sources/direction.cpp \
+    sources/gamemanager.cpp \
     sources/main.cpp \
     sources/pacman.cpp
 
 HEADERS += \
     headers/background.h \
+    headers/direction.h \
+    headers/gamemanager.h \
     headers/config.h \
     headers/enemy.h \
     headers/entity.h \
