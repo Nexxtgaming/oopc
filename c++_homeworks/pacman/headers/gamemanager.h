@@ -7,12 +7,14 @@
 #include "config.h"
 #include <QElapsedTimer>
 
+class GameMap;
+class Enemy;
 class GameManager
 {
 private:
     Pacman *player;
     GameMap *gameMap;
-    Enemy **enemies[ENEMY_NUMBER];
+    Enemy *enemies[ENEMY_NUMBER];
     int enemyNumber = 0;
     int mode = 1;
     bool gameOver = false;
@@ -23,7 +25,7 @@ private:
 
 public:
     GameManager(GameMap *gamemap, Pacman *player);
-    void addEnemy(Enemy **enemyTable[ENEMY_NUMBER]);
+    void addEnemy(Enemy *enemyTable[ENEMY_NUMBER]);
     bool isGameOver();
     friend class Enemy;
     friend class Pacman;

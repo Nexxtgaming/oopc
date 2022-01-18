@@ -5,6 +5,7 @@
 #include "../headers/gamemap.h"
 #include "../headers/config.h"
 #include "../headers/background.h"
+#include "../headers/gamemanager.h"
 #include <QGraphicsView>
 
 int main(int argc, char *argv[])
@@ -16,6 +17,7 @@ int main(int argc, char *argv[])
     BackGround *background = new BackGround();
     GameMap *gamemap = new GameMap();
     background->drawBackGround(*gamemap);
+    GameManager *gameManager = new GameManager(gamemap, pacman);
 
     pacman->setFlag(QGraphicsItem::ItemIsFocusable);
     scene->addItem(pacman);

@@ -9,11 +9,12 @@ GameManager::GameManager(GameMap *gameMap, Pacman *player)
     this->timer.start();
 }
 
-void GameManager::addEnemy(Enemy **enemyTable[ENEMY_NUMBER])
+void GameManager::addEnemy(Enemy *enemyTable[ENEMY_NUMBER])
 {
     for (int i = 0; i < ENEMY_NUMBER; i++)
     {
         enemies[i] = enemyTable[i];
+        enemies[i]->gameManager = this;
     }
 }
 

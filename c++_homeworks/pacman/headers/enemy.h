@@ -3,9 +3,9 @@
 
 #include <QTimer>
 #include <QObject>
-#include "../headers/entity.h"
+#include "entity.h"
 #include <vector>
-#include "../headers/direction.h"
+#include "direction.h"
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>

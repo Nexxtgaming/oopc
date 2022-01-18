@@ -1,5 +1,10 @@
 #include "../headers/entity.h"
 
+Entity::Entity(QString imagePath, QObject *parent) : QObject(parent), QGraphicsPixmapItem()
+{
+    setPixmap(QPixmap(imagePath));
+}
+
 bool Entity::isMovePossible(std::string direction)
 {
     int cellValue;
@@ -22,9 +27,4 @@ bool Entity::isMovePossible(std::string direction)
     if (cellValue)
         return true;
     return false;
-}
-
-Entity::Entity(QString imagePath, QObject *parent) : QObject(parent), QGraphicsPixmapItem()
-{
-    setPixmap(QPixmap(imagePath));
 }

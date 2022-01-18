@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include "gamemap.h"
-
+class GameManager;
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -17,8 +17,6 @@ protected:
 public:
     explicit Entity(QString imagePath, QObject *parent = nullptr);
     friend class GameManager;
-
-signals:
 };
 
 #endif // ENTITY_H

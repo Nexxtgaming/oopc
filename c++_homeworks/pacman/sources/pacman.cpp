@@ -14,28 +14,28 @@ void Pacman::keyPressEvent(QKeyEvent *event)
         this->posX--;
         int newX = MARGIN_X + posX * SIZE;
         setPos(newX, y());
-        // setPixmap(QPixmap()) left
+        setPixmap(QPixmap("../rescources/pacman-left.png"));
     }
     else if (event->key() == Qt::Key_Right && isMovePossible("right"))
     {
         this->posX++;
         int newX = MARGIN_X + posX * SIZE;
         setPos(newX, y());
-        // setPixmap(QPixmap()) right
+        setPixmap(QPixmap("../resources/pacman-right.png"));
     }
     else if (event->key() == Qt::Key_Up && isMovePossible("up"))
     {
         this->posY--;
         int newY = MARGIN_Y + posY * SIZE;
         setPos(x(), newY);
-        // setPixmap(QPixmap()) up
+        setPixmap(QPixmap("../resources/pacman-up.png"));
     }
     else if (event->key() == Qt::Key_Down && isMovePossible("down"))
     {
         this->posY++;
         int newY = MARGIN_Y + posY * SIZE;
         setPos(x(), newY);
-        // setPixmap(QPixmap()) down
+        setPixmap(QPixmap("../resources/pacman-down.png"));
     }
     getPoint();
 }
