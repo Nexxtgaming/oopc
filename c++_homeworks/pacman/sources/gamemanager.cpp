@@ -64,7 +64,7 @@ void GameManager::updateScene(){
             if(value == 1){
                 for(Point * point : points){
                     if(point->getX() == i && point->getY() == j){
-                        delete point;
+                        point->setVisible(false);
                     }
                 }
             }
@@ -72,13 +72,13 @@ void GameManager::updateScene(){
     }
     for(Enemy * enemy : enemies){
         if(enemy->isDead){
-            delete enemy;
+            enemy->setVisible(false);
         }
     }
     
 }
 
-void GameManager::gameLoop(QGraphicsScene * scene)
+void GameManager::gameLoop()
 {
     if(!player->isDead){
         for(Enemy * enemy : enemies){
@@ -94,11 +94,9 @@ void GameManager::gameLoop(QGraphicsScene * scene)
 
 
 
+    }else{
+        abort();
     }
-    QList<QGraphicsItem*> L = scene->items();
-    while (!L.empty()){
-		scene->removeItem(L.first());
-                delete L.first();
-    }
+       
 
 }

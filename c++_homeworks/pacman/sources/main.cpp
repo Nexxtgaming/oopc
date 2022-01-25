@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     view->show();
     view->setFixedSize(SCENE_WIDTH, SCENE_HEIGHT);
     scene->setSceneRect(0, 0, SCENE_WIDTH, SCENE_HEIGHT);
-    gameManager->gameLoop(scene);
+    gameManager->gameLoop();
 
     return a.exec();
 }

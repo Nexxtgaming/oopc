@@ -42,5 +42,5 @@ public:
     friend class Pacman;
     friend class Entity;
 public slots:
-    void gameLoop(QGraphicsScene * scene);
+    void gameLoop();
 };

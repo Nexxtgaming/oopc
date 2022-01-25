@@ -66,15 +66,18 @@ Direction Enemy::chooseDirection(std::vector<Direction> directions, int mode)
     {
         for (Direction direction : directions)
         {
-            Vector2 moveVector = direction.getVector();
-            Vector2 vectorToTarget;
-            vectorToTarget.x = player->posX + target.x - posX + moveVector.x;
-            vectorToTarget.y = player->posY + target.y - posY + moveVector.y;
-            double distance = sqrt(pow(vectorToTarget.x, 2) + pow(vectorToTarget.y, 2));
-            if (distance <= minDistance && direction.getDirString() != approachFrom.getDirString())
-            {
-                minDistance = distance;
-                nextDirection = direction;
+            if(direction.getDirString() != approachFrom.getDirString()){
+                Vector2 moveVector = direction.getVector();
+                Vector2 vectorToTarget;
+                vectorToTarget.x = player->posX + target.x - posX + moveVector.x;
+                vectorToTarget.y = player->posY + target.y - posY + moveVector.y;
+                double distance = sqrt(pow(vectorToTarget.x, 2) + pow(vectorToTarget.y, 2));
+                if (distance <= minDistance )
+                {
+                    minDistance = distance;
+                    nextDirection = direction;
+                }
+
             }
         }
     }
