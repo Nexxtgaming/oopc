@@ -49,3 +49,9 @@ std::string Direction::getDirString()
 {
     return directionString;
 }
+
+void Direction::operator=(std::string direction)
+{
+    directionString = direction;
+    setVector();
+}

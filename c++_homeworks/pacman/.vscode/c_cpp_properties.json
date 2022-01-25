@@ -11,11 +11,10 @@
                 "/usr/include/x86_64-linux-gnu/qt5/QtGui"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c11",
-            "cppStandard": "c++14",
-            "intelliSenseMode": "linux-clang-x64"
-        }
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"        }
     ],
     "version": 4
 }

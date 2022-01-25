@@ -1,30 +1,35 @@
 #include "../headers/entity.h"
 
-Entity::Entity(QString imagePath, QObject *parent) : QObject(parent), QGraphicsPixmapItem()
+Entity::Entity(QString imagePath, GameMap *gameMap, QObject *parent) : QObject(parent), QGraphicsPixmapItem()
 {
-    setPixmap(QPixmap(imagePath));
+    this->gameMap = gameMap;
+    image = QPixmap(imagePath).scaled(SIZE, SIZE);
+    setPixmap(image);
+    isDead = false;
 }
 
 bool Entity::isMovePossible(std::string direction)
 {
-    int cellValue;
+    int cellValue = 0;
     if (direction == "right")
     {
-        cellValue = gameManager->gameMap->getCellValue(posX, posY + 1);
+        cellValue = gameMap->getCellValue(posX, posY + 1);
     }
     if (direction == "left")
     {
-        cellValue = gameManager->gameMap->getCellValue(posX, posY - 1);
+        cellValue = gameMap->getCellValue(posX, posY - 1);
     }
     if (direction == "up")
     {
-        cellValue = gameManager->gameMap->getCellValue(posX - 1, posY);
+        cellValue = gameMap->getCellValue(posX - 1, posY);
     }
     if (direction == "down")
     {
-        cellValue = gameManager->gameMap->getCellValue(posX + 1, posY);
+        cellValue = gameMap->getCellValue(posX + 1, posY);
     }
-    if (cellValue)
+    if (cellValue > 0 || cellValue == -1){
         return true;
+    }
+
     return false;
 }

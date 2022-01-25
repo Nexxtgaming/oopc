@@ -1,25 +1,21 @@
-#pragma once 
+#pragma once
 
 #include <QObject>
 #include <QGraphicsPixmapItem>
 #include "config.h"
-#include "gamemanager.h"
 #include "gamemap.h"
-
-class GameMap;
-class GameManager;
-
 class Entity : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 protected:
+    QPixmap image;
     int posX;
     int posY;
-    GameManager *gameManager;
+    bool isDead;
+    GameMap *gameMap;
     bool isMovePossible(std::string direction);
 
 public:
-    explicit Entity(QString imagePath, QObject *parent = nullptr);
+    explicit Entity(QString imagePath, GameMap *gameMap, QObject *parent = nullptr);
     friend class GameManager;
 };
-

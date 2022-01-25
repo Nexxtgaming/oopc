@@ -17,18 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    sources/background.cpp \
     sources/enemy.cpp \
     sources/entity.cpp \
     sources/gamemap.cpp \
     sources/direction.cpp \
+    sources/gametimer.cpp \
     sources/gamemanager.cpp \
     sources/main.cpp \
     sources/pacman.cpp
 
 HEADERS += \
-    headers/background.h \
     headers/direction.h \
+    headers/gametimer.h \
+    headers/square.h \
+    headers/point.h \
     headers/gamemanager.h \
     headers/config.h \
     headers/enemy.h \

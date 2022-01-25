@@ -19,4 +19,5 @@ public:
     Vector2 getVector();
     std::string getReverseDirection();
     std::string getDirString();
+    void operator=(std::string direction);
 };

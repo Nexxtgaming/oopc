@@ -1,12 +1,9 @@
 #pragma once
-#include <QPainterPath>
 #include "config.h"
-#include "gamemanager.h"
-class GameManager;
 
 class GameMap
 {
-    GameManager *gameManager;
+private:
     int board[BOARD_X][BOARD_Y] = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -47,6 +44,5 @@ class GameMap
 public:
     GameMap();
     int getCellValue(int x, int y) const;
-    void drawBoard(QPainterPath &wallsPath, QPainterPath &otherPath);
 };
 
