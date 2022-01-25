@@ -5,7 +5,8 @@ Enemy::Enemy(QString imagePath, std::string name, Pacman *player) : Entity(image
     this->name = name;
     this->player = player;
     posX = 13;
-    initValues();
+    initValues(true);
+    setPos(MARGIN_X + posY * SIZE, MARGIN_Y + posX * SIZE);
     std::vector<Direction> possibleDirections = getPossibleDirections();
     approachFrom = possibleDirections[0].getReverseDirection();
     srand(time(NULL));
@@ -55,10 +56,9 @@ Direction Enemy::chooseDirection(std::vector<Direction> directions, int mode)
     vectorToTarget.y = player->posY - posY;
     double currentDistance = sqrt(pow(vectorToTarget.x, 2) + pow(vectorToTarget.y, 2));
 
-    if (mode == 3 || (isOrange && (currentDistance > 8 * SIZE)))
+    if (mode == 3 || (isOrange && (currentDistance > 8 )))
     {
         int randChoice = rand() % directions.size();
-        std::cout<<randChoice<<std::endl;
         nextDirection = directions[randChoice];
         
     }
@@ -69,8 +69,8 @@ Direction Enemy::chooseDirection(std::vector<Direction> directions, int mode)
             if(direction.getDirString() != approachFrom.getDirString()){
                 Vector2 moveVector = direction.getVector();
                 Vector2 vectorToTarget;
-                vectorToTarget.x = player->posX + target.x - posX + moveVector.x;
-                vectorToTarget.y = player->posY + target.y - posY + moveVector.y;
+                vectorToTarget.x = player->posX + target.x - posX - moveVector.x;
+                vectorToTarget.y = player->posY + target.y - posY - moveVector.y;
                 double distance = sqrt(pow(vectorToTarget.x, 2) + pow(vectorToTarget.y, 2));
                 if (distance <= minDistance )
                 {
@@ -85,6 +85,7 @@ Direction Enemy::chooseDirection(std::vector<Direction> directions, int mode)
 }
 int Enemy::move(int mode, int timeElapsed)
 {
+    initValues(false);
     if (mode != 1 && timeElapsed > SCARED_DURATION)
     {
         mode = 1;
@@ -114,6 +115,7 @@ int Enemy::move(int mode, int timeElapsed)
     posY += nextMove.y;
     approachFrom = nextDirection.getReverseDirection();
     overlap();
+    moveAnimation(nextDirection.getDirString());
     setPos(MARGIN_X + posY * SIZE, MARGIN_Y + posX * SIZE);
     return mode;
 }
@@ -126,31 +128,31 @@ void Enemy::overlap(){
     if(posX == BOARD_X) posX = 0;
 }
 
-void Enemy::initValues()
+void Enemy::initValues(bool isConstructor)
 {
     int firstSpawnPos = 10;
     if (name == "inky")
     {
         chaseTarget.x = 2 * player->direction.getVector().x;
         chaseTarget.y = 2 * player->direction.getVector().y;
-        posY = firstSpawnPos;
+        if(isConstructor) posY = firstSpawnPos;
         scatterTarget = {0, BOARD_Y - 1};
     }
     if (name == "blinky")
     {
-        posY = firstSpawnPos + 1;
+        if(isConstructor)posY = firstSpawnPos + 1;
         chaseTarget = {0, 0};
         scatterTarget = {BOARD_X - 1, 0};
     }
     if (name == "clyde")
     {
-        posY = firstSpawnPos + 2;
+        if(isConstructor) posY = firstSpawnPos + 2;
         isOrange = true;
         scatterTarget = {BOARD_X - 1, BOARD_Y - 1};
     }
     if (name == "pinky")
     {
-        posY = firstSpawnPos + 3;
+        if(isConstructor) posY = firstSpawnPos + 3;
         chaseTarget.x = 4 * player->direction.getVector().x;
         chaseTarget.y = 4 * player->direction.getVector().y;
 

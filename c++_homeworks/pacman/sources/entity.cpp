@@ -33,3 +33,37 @@ bool Entity::isMovePossible(std::string direction)
 
     return false;
 }
+void Entity::moveAnimation(std::string direction){
+    if (direction == "right")
+    {
+        for(int i = 0; i < SIZE; i++){
+            setPos(x()+1, y());
+            for(int j = 0; j < 5000; j++){}
+        }
+    }
+    if (direction == "left")
+    {
+        for(int i = 0; i < SIZE; i++){
+            setPos(x()-1, y());
+            for(int j = 0; j < 5000; j++){}
+        }
+
+    }
+    if (direction == "up")
+    {
+        for(int i = 0; i < SIZE; i++){
+            setPos(x(), y()-1);
+            for(int j = 0; j < 5000; j++){}
+        }
+
+    }
+    if (direction == "down")
+    {
+        for(int i = 0; i < SIZE; i++){
+            setPos(x(), y()+1);
+            for(int j = 0; j < 5000; j++){}
+        }
+
+    }
+
+}

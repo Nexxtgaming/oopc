@@ -22,6 +22,10 @@
         "streambuf": "cpp",
         "system_error": "cpp",
         "tuple": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "ratio": "cpp",
+        "array": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     }
 }

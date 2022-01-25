@@ -27,6 +27,7 @@ private:
     std::vector<Point *> points;
     QGraphicsTextItem * text;
     void updateScene();
+    bool allEnemiesKilled();
 
 
 public:

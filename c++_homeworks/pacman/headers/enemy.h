@@ -23,7 +23,7 @@ private:
     Direction approachFrom;
     std::vector<Direction> getPossibleDirections();
     Direction chooseDirection(std::vector<Direction> directions, int mode);
-    void initValues();
+    void initValues(bool isConstructor);
     void setPlayer(Pacman *player);
     void eatPlayer(int mode);
     void overlap();

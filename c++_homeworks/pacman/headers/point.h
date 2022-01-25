@@ -15,10 +15,10 @@ class Point : public QGraphicsPixmapItem {
 		this->y = y;
         if(isSpecial){
             amount = BIG_POINT;
-            this->setPixmap(QPixmap("resources/point1.png").scaled(SIZE, SIZE));
+            this->setPixmap(QPixmap("resources/point2.png").scaled(SIZE, SIZE));
         }else{
             amount = SMALL_POINT;
-            this->setPixmap(QPixmap("resources/point2.png").scaled(SIZE, SIZE));
+            this->setPixmap(QPixmap("resources/point1.png").scaled(SIZE, SIZE));
 
         }
 	}

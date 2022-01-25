@@ -14,6 +14,7 @@ protected:
     bool isDead;
     GameMap *gameMap;
     bool isMovePossible(std::string direction);
+    void moveAnimation(std::string direction);
 
 public:
     explicit Entity(QString imagePath, GameMap *gameMap, QObject *parent = nullptr);

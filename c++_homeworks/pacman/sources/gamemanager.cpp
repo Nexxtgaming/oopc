@@ -8,7 +8,7 @@ GameManager::GameManager(QObject *parent) : QObject(parent)
     gameTimer = new GameTimer();
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(gameLoop()));
-    timer->start(200);
+    timer->start(150);
     addEnemies();
 }
 
@@ -44,6 +44,7 @@ void GameManager::drawGameMap(QGraphicsScene * scene){
                 Point * newPoint = new Point(i, j, isSpecial);
                 points.push_back(newPoint);
                 newPoint->setPos(MARGIN_Y + newPoint->getY() * SIZE, newPoint->getX()* SIZE + MARGIN_X);
+                scene->addItem(newPoint);
             }
 
         }
@@ -78,6 +79,13 @@ void GameManager::updateScene(){
     
 }
 
+bool GameManager::allEnemiesKilled(){
+    for(Enemy * enemy : enemies){
+        if(!enemy->isDead)return false;
+    }
+    return true;
+}
+
 void GameManager::gameLoop()
 {
     if(!player->isDead){
@@ -89,8 +97,9 @@ void GameManager::gameLoop()
         const char * textValue = "Points";
         text->setProperty(textValue, player->points);
 
-        std::cout<<player->points<<std::endl;
         updateScene();
+        if(allEnemiesKilled()) abort();
+
 
 
 
